@@ -1,3 +1,74 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { Login } from './features/auth/login/login';
+import { Signup } from './features/auth/signup/signup';
+import { Dashboard } from './features/dashboard/dashboard';
+
+import { authGuard } from './core/guards/auth-guard';
+import { AppLayout } from './layouts/app-layout/app-layout';
+
+export const routes: Routes = [
+
+  {
+    path: 'login',
+    component: Login
+  },
+
+  {
+    path: 'signup',
+    component: Signup
+  },
+
+  {
+    path: 'app',
+    component: AppLayout,
+    canActivate: [authGuard],
+    children: [
+
+      {
+        path: 'dashboard',
+        component: Dashboard
+      },
+
+      {
+        path: 'workspaces',
+        loadComponent: () =>
+          import('./features/workspaces/workspaces')
+            .then(m => m.Workspaces)
+      },
+
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings')
+            .then(m => m.Settings)
+      },
+
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/profile/profile')
+            .then(m => m.Profile)
+      },
+
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }
+
+    ]
+  },
+
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
+
+];
