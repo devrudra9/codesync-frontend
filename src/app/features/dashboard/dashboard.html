@@ -1,4 +1,61 @@
-<div class="dashboard-container">
-  <h1>Dashboard</h1>
-  <p>Welcome to CodeSync 🚀</p>
-</div>
+<section class="dashboard-header">
+
+  <div>
+
+    <h1>Welcome back 👋</h1>
+
+    <p>
+      Continue building with CodeSync.
+    </p>
+
+  </div>
+
+  <button>
+    + New Workspace
+  </button>
+
+</section>
+
+<section class="stats-grid">
+
+  @for (stat of stats; track stat.title) {
+
+  <app-stat-card
+    [title]="stat.title"
+    [value]="stat.value"
+    [icon]="stat.icon">
+  </app-stat-card>
+
+  }
+
+</section>
+
+<section class="recent">
+
+  <h2>Recent Workspaces</h2>
+
+  <div class="workspace-grid">
+
+    @for (workspace of recentWorkspaces; track workspace.id) {
+
+    <div class="workspace-card">
+
+      <h3>
+        {{ workspace.name }}
+      </h3>
+
+      <p>
+        {{ workspace.description }}
+      </p>
+
+      <span>
+                    Updated {{ workspace.updatedAt }}
+                </span>
+
+    </div>
+
+    }
+
+  </div>
+
+</section>
