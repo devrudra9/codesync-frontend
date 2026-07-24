@@ -1,0 +1,67 @@
+.navbar {
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  background: white;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search input {
+
+  width: 420px;
+
+  padding: 10px 14px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 8px;
+
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn,
+.profile-btn {
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+
+  border: none;
+
+  cursor: pointer;
+
+  background: #f3f4f6;
+}
+
+.profile-btn {
+  font-weight: 700;
+}
