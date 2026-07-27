@@ -1,29 +1,34 @@
 <section class="page-header">
   <div>
     <h1>Projects</h1>
-    <p>Manage all your projects.</p>
+    <p>Manage your workspace library, explore shared projects, and launch coding sessions.</p>
   </div>
 
-  <button (click)="openCreateDialog()">
-    + New Project
-  </button>
+  <button (click)="openCreateDialog()">+ New Project</button>
 </section>
 
-<div
-  class="projects-grid">
-  <app-project-card
-    *ngFor="let project of projects"
-    [project]="project"
-    (open)="openProject($event)"
-    (edit)="editProject($event)"
-    (delete)="deleteProject($event)">
-  </app-project-card>
+<section class="project-intro">
+  <div>
+    <h2>Build faster</h2>
+    <p>Create a project, open it in the editor, and keep your code execution history close at hand.</p>
+  </div>
+</section>
 
+<div class="projects-grid">
+  @for (project of projects; track project.id) {
+    <app-project-card
+      [project]="project"
+      (open)="openProject($event)"
+      (edit)="editProject($event)"
+      (delete)="deleteProject($event)">
+    </app-project-card>
+  }
 </div>
 
 <app-project-form-dialog
   *ngIf="showCreateDialog"
-  mode="edit"
+  [mode]="dialogMode"
+  [project]="editingProject ?? undefined"
   (close)="closeCreateDialog()"
   (created)="onProjectCreated()">
 </app-project-form-dialog>

@@ -1,61 +1,30 @@
 <section class="dashboard-header">
-
   <div>
-
     <h1>Welcome back 👋</h1>
-
-    <p>
-      Continue building with CodeSync.
-    </p>
-
+    <p>Continue shipping great ideas with your collaborative workspace.</p>
   </div>
-
-  <button>
-    + New Project
-  </button>
-
+  <a class="primary-link" routerLink="/app/projects">+ New Project</a>
 </section>
 
 <section class="stats-grid">
-
   @for (stat of stats; track stat.title) {
-
-  <app-stat-card
-    [title]="stat.title"
-    [value]="stat.value"
-    [icon]="stat.icon">
-  </app-stat-card>
-
+    <app-stat-card [title]="stat.title" [value]="stat.value" [icon]="stat.icon"></app-stat-card>
   }
-
 </section>
 
 <section class="recent">
-
-  <h2>Recent Workspaces</h2>
-
-  <div class="workspace-grid">
-
-    @for (workspace of recentWorkspaces; track workspace.id) {
-
-    <div class="workspace-card">
-
-      <h3>
-        {{ workspace.name }}
-      </h3>
-
-      <p>
-        {{ workspace.description }}
-      </p>
-
-      <span>
-                    Updated {{ workspace.updatedAt }}
-                </span>
-
-    </div>
-
-    }
-
+  <div class="section-heading">
+    <h2>Recent Workspaces</h2>
+    <a routerLink="/app/projects">View all</a>
   </div>
 
+  <div class="workspace-grid">
+    @for (workspace of recentWorkspaces; track workspace.id) {
+      <div class="workspace-card">
+        <h3>{{ workspace.name }}</h3>
+        <p>{{ workspace.description }}</p>
+        <span>Updated {{ workspace.updatedAt }}</span>
+      </div>
+    }
+  </div>
 </section>

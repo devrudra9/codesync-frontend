@@ -7,6 +7,11 @@ import { Dashboard } from './features/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
 import { AppLayout } from './layouts/app-layout/app-layout';
 
+const editorRoute = {
+  path: 'editor/:projectId',
+  loadComponent: () => import('./features/editor/editor').then((m) => m.Editor),
+};
+
 export const routes: Routes = [
   {
     path: 'login',
@@ -42,6 +47,8 @@ export const routes: Routes = [
         path: 'profile',
         loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
       },
+
+      editorRoute,
 
       {
         path: '',
