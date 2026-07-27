@@ -1,0 +1,53 @@
+<section class="workspace-shell">
+  <header class="workspace-header">
+    <div>
+      <p class="eyebrow">Workspace</p>
+      <h1>{{ project?.name || 'CodeSync Workspace' }}</h1>
+      <p class="subtitle">Collaborative coding, execution, and project insight in one place.</p>
+    </div>
+    <a class="back-link" routerLink="/app/projects">← Back to projects</a>
+  </header>
+
+  <div class="workspace-grid">
+    <section class="panel editor-panel">
+      <div class="panel-header">
+        <h2>Code Editor</h2>
+        <select [(ngModel)]="selectedLanguage">
+          <option value="JAVA">Java</option>
+          <option value="PYTHON">Python</option>
+          <option value="CPP">C++</option>
+          <option value="JAVASCRIPT">JavaScript</option>
+        </select>
+      </div>
+
+      <textarea [(ngModel)]="code" spellcheck="false"></textarea>
+
+      <div class="actions">
+        <button class="primary" (click)="runCode()" [disabled]="isRunning">
+          {{ isRunning ? 'Running…' : 'Run Code' }}
+        </button>
+      </div>
+    </section>
+
+    <aside class="panel sidebar-panel">
+      <div class="panel-header">
+        <h2>Execution</h2>
+      </div>
+
+      <div class="status-card">
+        <span class="badge">{{ status }}</span>
+        <p><strong>Time:</strong> {{ executionTime }}</p>
+      </div>
+
+      <div class="terminal-block">
+        <h3>Output</h3>
+        <pre>{{ output || 'No output yet.' }}</pre>
+      </div>
+
+      <div class="terminal-block error-block">
+        <h3>Errors</h3>
+        <pre>{{ error || 'No errors reported.' }}</pre>
+      </div>
+    </aside>
+  </div>
+</section>

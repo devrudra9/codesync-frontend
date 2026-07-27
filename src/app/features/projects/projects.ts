@@ -22,6 +22,8 @@ export class Projects implements OnInit {
   projects: Project[] = [];
 
   showCreateDialog = false;
+  dialogMode: 'create' | 'edit' = 'create';
+  editingProject: Project | null = null;
 
   ngOnInit(): void {
     this.loadProjects();
@@ -40,23 +42,34 @@ export class Projects implements OnInit {
   }
 
   openProject(projectId: number): void {
-    console.log('Open Project:', projectId);
+    window.location.assign(`/app/editor/${projectId}`);
   }
 
   editProject(projectId: number): void {
-    console.log('Edit Project:', projectId);
+    const project = this.projects.find((item) => item.id === projectId);
+    if (project) {
+      this.dialogMode = 'edit';
+      this.editingProject = project;
+      this.showCreateDialog = true;
+    }
   }
 
   deleteProject(projectId: number): void {
-    console.log('Delete Project:', projectId);
+    this.projectService.deleteProject(projectId).subscribe({
+      next: () => this.loadProjects(),
+      error: (err) => console.error(err),
+    });
   }
 
   openCreateDialog(): void {
+    this.dialogMode = 'create';
+    this.editingProject = null;
     this.showCreateDialog = true;
   }
 
   closeCreateDialog(): void {
     this.showCreateDialog = false;
+    this.editingProject = null;
   }
 
   onProjectCreated(): void {
