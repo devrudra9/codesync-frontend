@@ -1,0 +1,23 @@
+<div class="project-card">
+  <div class="project-header">
+    <h3>{{ project.name }}</h3>
+    <span>{{ project.primaryLanguage || 'N/A' }}</span>
+  </div>
+  <p>
+    {{ project.description }}
+  </p>
+  <small>
+    Updated {{ project.updatedAt }}
+  </small>
+  <div class="actions">
+    <button (click)="onOpen()">
+      Open
+    </button>
+    <button (click)="onEdit()">
+      Edit
+    </button>
+    <button class="danger" (click)="onDelete()">
+      Delete
+    </button>
+  </div>
+</div>

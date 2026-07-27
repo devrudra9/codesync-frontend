@@ -8,15 +8,14 @@ import { authGuard } from './core/guards/auth-guard';
 import { AppLayout } from './layouts/app-layout/app-layout';
 
 export const routes: Routes = [
-
   {
     path: 'login',
-    component: Login
+    component: Login,
   },
 
   {
     path: 'signup',
-    component: Signup
+    component: Signup,
   },
 
   {
@@ -24,51 +23,42 @@ export const routes: Routes = [
     component: AppLayout,
     canActivate: [authGuard],
     children: [
-
       {
         path: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
       },
 
       {
-        path: 'workspaces',
-        loadComponent: () =>
-          import('./features/workspaces/workspaces')
-            .then(m => m.Workspaces)
+        path: 'projects',
+        loadComponent: () => import('./features/projects/projects').then((m) => m.Projects),
       },
 
       {
         path: 'settings',
-        loadComponent: () =>
-          import('./features/settings/settings')
-            .then(m => m.Settings)
+        loadComponent: () => import('./features/settings/settings').then((m) => m.Settings),
       },
 
       {
         path: 'profile',
-        loadComponent: () =>
-          import('./features/profile/profile')
-            .then(m => m.Profile)
+        loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
       },
 
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
-      }
-
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
 
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
 
   {
     path: '**',
-    redirectTo: 'login'
-  }
-
+    redirectTo: 'login',
+  },
 ];
