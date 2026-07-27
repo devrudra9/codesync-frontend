@@ -1,0 +1,125 @@
+.backdrop {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, .45);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.dialog {
+
+    width: 520px;
+
+    max-width: 95%;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow: 0 12px 40px rgba(0,0,0,.18);
+}
+
+.dialog-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.close-button {
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 20px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+.form-group label {
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+}
+
+.form-group small {
+
+    color: #dc2626;
+
+    margin-top: 6px;
+}
+
+.actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.actions button {
+
+    padding: 10px 20px;
+
+    border-radius: 8px;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.secondary {
+
+    background: #e5e7eb;
+}
+
+.actions button[type="submit"] {
+
+    background: #2563eb;
+
+    color: white;
+}

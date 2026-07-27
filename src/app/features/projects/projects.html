@@ -1,0 +1,29 @@
+<section class="page-header">
+  <div>
+    <h1>Projects</h1>
+    <p>Manage all your projects.</p>
+  </div>
+
+  <button (click)="openCreateDialog()">
+    + New Project
+  </button>
+</section>
+
+<div
+  class="projects-grid">
+  <app-project-card
+    *ngFor="let project of projects"
+    [project]="project"
+    (open)="openProject($event)"
+    (edit)="editProject($event)"
+    (delete)="deleteProject($event)">
+  </app-project-card>
+
+</div>
+
+<app-project-form-dialog
+  *ngIf="showCreateDialog"
+  mode="edit"
+  (close)="closeCreateDialog()"
+  (created)="onProjectCreated()">
+</app-project-form-dialog>
