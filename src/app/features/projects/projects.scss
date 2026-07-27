@@ -22,6 +22,23 @@
     cursor: pointer;
 }
 
+.project-intro {
+    background: white;
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.project-intro h2 {
+    margin: 0 0 6px;
+}
+
+.project-intro p {
+    margin: 0;
+    color: #64748b;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

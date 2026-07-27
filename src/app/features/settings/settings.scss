@@ -1,0 +1,17 @@
+.settings-shell {
+  display: flex;
+  justify-content: center;
+}
+
+.settings-card {
+  width: min(640px, 100%);
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.settings-card ul {
+  padding-left: 1.1rem;
+  color: #475569;
+}

@@ -1,0 +1,581 @@
+CodeSync Platform - Frontend Implementation Context
+Project Overview
+
+CodeSync is a full-stack collaborative coding platform inspired by GitHub + VS Code + Replit.
+
+The backend is built using:
+
+Java 21
+Spring Boot
+Spring Security + JWT
+Spring Data JPA
+PostgreSQL
+WebSocket (STOMP + SockJS)
+
+The frontend should be built using:
+
+Angular 20
+Angular Material
+RxJS
+STOMP.js
+Monaco Editor
+Responsive design
+
+The frontend should consume the existing REST APIs and WebSocket endpoints. Do NOT redesign backend APIs unless absolutely necessary.
+
+Authentication (Completed)
+
+Backend already supports JWT authentication.
+
+Features:
+
+Register
+Login
+JWT Access Token
+BCrypt password hashing
+Spring Security authentication
+Protected APIs
+
+Frontend Requirements:
+
+Login page
+Register page
+Store JWT
+HTTP Interceptor
+Route Guards
+Logout
+Token persistence
+Feature 1 — Projects (Completed)
+
+Project entity contains:
+
+id
+name
+description
+primaryLanguage
+visibility (PUBLIC/PRIVATE)
+ownerUsername
+forkCount
+parentProjectId
+createdAt
+updatedAt
+
+Backend supports:
+
+Create Project
+Update Project
+Delete Project
+Get Project
+Get My Projects
+Search Projects
+Public Projects
+Fork Project
+
+Forks preserve parent project and increment parent's fork count.
+
+Frontend Pages:
+
+Dashboard
+My Projects
+Public Explore
+Create Project Dialog
+Project Details
+Feature 2 — Project Stars (Completed)
+
+Users can
+
+Star project
+Unstar project
+Check if starred
+
+Backend tracks star count.
+
+Frontend:
+
+Show
+
+⭐ Star
+
+or
+
+⭐ Starred
+
+similar to GitHub.
+
+Feature 3 — Project Explorer (Completed)
+
+Supports folders and files.
+
+Entity:
+
+ProjectItem
+
+id
+projectId
+parentId
+name
+type (FILE/FOLDER)
+content
+createdAt
+updatedAt
+
+Backend APIs:
+
+Create Folder
+
+Create File
+
+Rename
+
+Delete
+
+Get Tree
+
+Get File Content
+
+Update File Content
+
+Frontend should implement
+
+Explorer similar to VS Code:
+
+Project
+
+src
+    main
+        App.java
+
+resources
+
+README.md
+
+Folder expand/collapse
+
+Context menu
+
+New File
+
+New Folder
+
+Rename
+
+Delete
+
+Feature 4 — Version Control (Basic)
+
+Implemented:
+
+Commit Entity
+
+id
+projectId
+author
+commitHash
+message
+committedAt
+
+Backend supports
+
+Create Commit
+
+View Commit History
+
+Commit hash generated using SHA-1 utility.
+
+Frontend
+
+Commit Dialog
+
+Commit History Sidebar
+
+Future:
+
+Diff Viewer
+
+Branches
+
+Merge
+
+Revert
+
+Feature 5 — Code Execution Engine
+
+Supports
+
+Java
+
+Python
+
+C++
+
+JavaScript
+
+Current flow
+
+User submits source code
+
+Backend creates temporary directory
+
+Compiles (if needed)
+
+Runs
+
+Captures
+
+stdout
+
+stderr
+
+execution time
+
+exit code
+
+Stores execution history
+
+ExecutionResponse
+
+output
+error
+status
+exitCode
+executionTimeMs
+
+Frontend
+
+Editor
+
+Language selector
+
+Run button
+
+Output terminal
+
+Error terminal
+
+Loading spinner
+
+Execution history
+
+Future
+
+Docker sandbox
+
+Resource limits
+
+10+ languages
+
+Feature 6 — Realtime Collaboration
+
+Backend uses
+
+WebSocket
+
+STOMP
+
+SockJS
+
+Messages
+
+projectId
+itemId
+username
+content
+operation
+line
+column
+timestamp
+
+Operations
+
+JOIN
+LEAVE
+EDIT
+CURSOR
+SAVE
+
+Backend broadcasts
+
+/topic/project/{projectId}
+
+Frontend should use
+
+@stomp/stompjs
+
+Features
+
+Connect on project open
+
+Disconnect on leave
+
+Broadcast edits
+
+Broadcast cursor
+
+Broadcast join
+
+Broadcast leave
+
+Future
+
+Operational Transform
+
+CRDT
+
+Conflict resolution
+
+Presence
+
+Authorization
+
+Project owner has full access.
+
+Public projects
+
+can be viewed
+
+can be forked
+
+Private projects
+
+only owner can modify.
+
+Frontend should
+
+Hide unauthorized actions
+
+Show read-only mode
+
+API Response Format
+
+Every endpoint returns
+
+{
+  "success": true,
+  "message": "...",
+  "data": {}
+}
+
+Frontend should create a generic API wrapper.
+
+Suggested Angular Folder Structure
+src/app
+
+core
+    auth
+    interceptors
+    guards
+    services
+
+shared
+    components
+    models
+
+features
+
+    auth
+
+    dashboard
+
+    projects
+
+    editor
+
+    explorer
+
+    commits
+
+    execution
+
+    collaboration
+
+layout
+
+pages
+Dashboard
+
+Show
+
+Recent Projects
+
+My Projects
+
+Public Projects
+
+Starred Projects
+
+Search
+
+Create Project button
+
+Project Page Layout
+-----------------------------------------------------
+
+Top Navbar
+
+-----------------------------------------------------
+
+Explorer
+
+Editor
+
+Output
+
+Sidebar
+
+Commit History
+
+-----------------------------------------------------
+
+Status Bar
+
+-----------------------------------------------------
+Explorer
+
+Supports
+
+Right Click
+
+New File
+
+New Folder
+
+Rename
+
+Delete
+
+Drag Drop (future)
+
+Editor
+
+Use Monaco Editor
+
+Language auto-detection
+
+Syntax highlighting
+
+Auto-save
+
+Dirty indicator
+
+Collaboration
+
+When project opens
+
+Connect WebSocket
+
+Subscribe
+
+/topic/project/{projectId}
+
+Send edits
+
+Receive edits
+
+Show online users
+
+Show cursor positions
+
+Future
+
+Remote selections
+
+Presence avatars
+
+Execution Panel
+
+Bottom panel
+
+Output
+
+Errors
+
+Execution Time
+
+Exit Code
+
+Clear Output
+
+Commit Panel
+
+Sidebar
+
+Commit message textbox
+
+Commit button
+
+History list
+
+Click commit
+
+(Future)
+
+Diff Viewer
+
+Project Details
+
+Show
+
+Owner
+
+Language
+
+Visibility
+
+Stars
+
+Forks
+
+Created
+
+Updated
+
+Description
+
+Future Enhancements (Already Planned)
+
+Backend TODO
+
+Dockerized code execution
+File version snapshots
+Commit diffs
+Branches
+Merge support
+Pull Requests
+Project collaborators (beyond owner)
+WebSocket authentication via JWT
+Operational Transform / CRDT
+Rate limiting
+Presence indicators
+Cursor colors
+Autosave
+Project templates
+Notifications
+AI-assisted coding integration
+Frontend Development Order
+
+To minimize rework, build the frontend in this sequence:
+
+Project setup – Angular Material, routing, theme, authentication infrastructure.
+Authentication – Login, Register, JWT interceptor, route guards.
+Dashboard – My Projects, Public Projects, Search, Create Project.
+Project Management – Project details, edit/delete, fork, star/unstar.
+File Explorer – Tree view, CRUD for files and folders.
+Monaco Editor – File loading, editing, save/update content.
+Code Execution – Language selector, Run button, output terminal.
+Version Control – Commit dialog and commit history panel.
+Realtime Collaboration – STOMP connection, collaborative editing, active users, cursor updates.
+UI Polish – Responsive layout, dark/light theme, animations, loading states, error handling.
+Overall Progress
+
+Your backend is already substantial and resembles a production-oriented architecture rather than a simple CRUD application:
+
+✅ Authentication & Security
+✅ Project Management
+✅ Project Stars
+✅ Hierarchical File System
+✅ Basic Version Control
+✅ Multi-language Code Execution
+✅ Realtime Collaboration Backend
+⏳ Angular Frontend (next phase)
+⏳ Advanced Collaboration (OT/CRDT, JWT WebSocket auth, presence)
+⏳ Advanced Git-like Features (branches, merges, diffs)
