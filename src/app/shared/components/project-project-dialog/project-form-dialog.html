@@ -1,0 +1,74 @@
+<div class="backdrop" (click)="close.emit()">
+  <div class="dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h2>
+        {{ mode === 'create'
+        ? 'Create Project'
+        : 'Edit Project'
+        }}
+      </h2>
+      <button
+        type="button"
+        class="close-button"
+        (click)="close.emit()">
+        ✕
+      </button>
+    </div>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Project Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Enter project name" />
+        @if (form.controls.name.invalid &&
+        form.controls.name.touched) {
+        <small>
+          Project name is required.
+        </small>
+        }
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          rows="4"
+          formControlName="description"
+          placeholder="Project description">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label>Primary Language</label>
+        <select formControlName="primaryLanguage">
+          @for (language of languages; track language) {
+          <option [value]="language">
+            {{ language }}
+          </option>
+          }
+        </select>
+      </div>
+      <div class="actions">
+        <button
+          type="button"
+          class="secondary"
+          (click)="close.emit()">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [disabled]="isSubmitting">
+          {{
+          isSubmitting
+          ? (mode === 'create'
+          ? 'Creating...'
+          : 'Saving...')
+          : (mode === 'create'
+          ? 'Create Project'
+          : 'Save Changes')
+          }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
