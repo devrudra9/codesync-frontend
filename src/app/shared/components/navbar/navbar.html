@@ -15,13 +15,27 @@
 
   <div class="actions">
 
-    <button class="icon-btn">
+    <button class="icon-btn" aria-label="notifications">
       🔔
     </button>
 
-    <button class="profile-btn">
-      RB
-    </button>
+    <ng-container *ngIf="currentUser$ | async as user; else guest">
+      <div class="profile">
+        <button class="profile-btn" (click)="toggleProfile()">
+          {{ user.username || (user.email | slice:0:1) | uppercase }}
+        </button>
+
+        <div class="profile-dropdown" *ngIf="showProfile">
+          <div class="profile-row"><strong>User ID:</strong> {{ user.userId }}</div>
+          <div class="profile-row"><strong>Username:</strong> {{ user.username }}</div>
+          <div class="profile-row"><strong>Email:</strong> {{ user.email }}</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #guest>
+      <button class="profile-btn" routerLink="/login">Login</button>
+    </ng-template>
 
   </div>
 
